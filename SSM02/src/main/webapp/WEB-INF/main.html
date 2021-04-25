@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>后台管理</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="js/layui/css/layui.css" media="all">
+</head>
+<body>
+
+	<div class="layui-layout layui-layout-admin">
+		<div class="layui-header">
+			<div class="layui-logo">后台管理</div>
+			<!-- 头部区域（可配合layui已有的水平导航） -->
+			<ul class="layui-nav layui-layout-left">
+				<span class="layui-nav-bar"
+					style="left: 217px; top: 55px; width: 0px; opacity: 0;"></span>
+			</ul>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item"><a href="javascript:;"><div id="username"></div><span
+						class="layui-nav-more"></span></a>
+					<dl class="layui-nav-child">
+						<dd>
+							<a href="">基本资料</a>
+						</dd>
+						<dd>
+							<a href="">安全设置</a>
+						</dd>
+					</dl></li>
+				<li class="layui-nav-item"><a href="exit">退出</a></li>
+				<span class="layui-nav-bar"></span>
+			</ul>
+		</div>
+
+		<div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree" lay-filter="test">
+        <li class="layui-nav-item"><a target="frame"  href="user/user" >User表</a></li>
+        <li class="layui-nav-item" ><a target="frame"  href="shop/shop" >Shop表</a></li>
+      <span class="layui-nav-bar"></span></ul>
+    </div>
+  </div>
+	
+		<div class="layui-body" style="overflow: hidden">
+			<iframe name="frame" src="user/user" id="demoAdmin"
+				style="width: 100%; height: 100%;" frameborder="no">
+				</iframe>
+					
+		</div>
+
+		<div class="layui-footer"></div>
+	</div>
+	<script src="js/layui/layui.js" charset="utf-8"></script>
+
+</body>
+<script type="text/javascript">
+
+layui.use(['form','layer','jquery'], function(){
+	var $ = layui.jquery;
+	$.get("getName",function(data){
+		/* var jsonData = JSON.stringify(data);// 转成JSON格式
+		var result = $.parseJSON(jsonData);// 转成JSON对象 */
+		//alert(result);
+		$("#username").text(data);
+				
+	});
+});
+</script>
+</html>

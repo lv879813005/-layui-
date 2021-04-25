@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 对应接口路径 -->
+<mapper namespace="cm.cn.dao.UserDao">
+
+	<sql id="tableName">
+		user
+	</sql>
+	<sql id="column">
+		id,
+		username,
+		pwd
+	</sql>
+	<sql id="css">
+		username,
+		pwd
+	</sql>
+	<sql id="cs">
+		#{username},
+		#{pwd}
+	</sql>
+	<sql id="cc">
+		${page},
+		${limit}
+	</sql>
+
+	<!-- 查询单个 -->
+	<select id="find" resultType="map" parameterType="map">
+		select
+		count(*) count
+		from
+		<include refid="tableName"></include>
+	</select>
+	<!-- 查询多个 -->
+	<select id="query" resultType="map" parameterType="map">
+		select
+		<include refid="column"></include>
+		from
+		<include refid="tableName"></include>
+		limit
+		<include refid="cc"></include>
+	</select>
+	<!-- 修改 -->
+	<update id="upd" parameterType="map">
+			update
+		 <include refid="tableName"></include> 
+		<set>
+			<foreach collection="map" index="key" item="value" separator=",">
+			${key}=#{value}
+			</foreach>
+		</set>
+		<where>
+			id = #{map.id}
+		</where>
+	</update>
+	<!-- 删除 -->
+	<delete id="del" parameterType="map">
+		delete from
+		<include refid="tableName"></include>  
+		where username=#{username} and pwd=#{pwd}
+	</delete>
+	<!-- 新增 -->
+	<insert id="save" parameterType="map">
+		insert into 
+		<include refid="tableName"></include>
+		(<include refid="css"></include> ) 
+		values(<include refid="cs"></include>)
+	</insert>
+</mapper>

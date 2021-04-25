@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 对应接口路径 -->
+<mapper namespace="cm.cn.dao.LoginDao">
+
+	<sql id="tableName" >
+		user
+	</sql>
+	<sql id="column">
+		username,
+		pwd
+	</sql>
+	<sql id="cs">
+		#{username},
+		#{pwd}
+	</sql>
+	
+	<!-- 查询单个 -->
+	<select id="find"  resultType="map"  parameterType="map">
+		select 
+			count(*) count
+		from  
+			<include refid="tableName"></include>
+		<where>
+				<if test="username!=null  and username!=''">
+					 and username =#{username}
+				</if>
+				<if test="pwd!=null  and pwd!=''">
+					 and pwd =#{pwd}
+				</if>
+		</where>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="save" parameterType="map">
+		insert into 
+		<include refid="tableName"></include>
+		(<include refid="column"></include> ) 
+		values(<include refid="cs"></include>)
+	</insert>
+</mapper>

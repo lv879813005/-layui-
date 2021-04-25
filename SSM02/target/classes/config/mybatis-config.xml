@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<plugins>
+		<plugin interceptor="cm.cn.interceptor.MybatisInterceptor">
+			<property name="dbname" value="mysql" />
+			<property name="version" value="5.6" />
+		</plugin>
+	</plugins>
+	<!-- 告诉 MyBatis到哪里去找映射文件 -->
+	<mappers>
+		<mapper resource="cm/cn/dao/mapper/LoginMapper.xml" />
+		<mapper resource="cm/cn/dao/mapper/UserMapper.xml" />
+		<mapper resource="cm/cn/dao/mapper/ShopMapper.xml" />
+	</mappers>
+</configuration>
